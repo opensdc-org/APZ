@@ -1,6 +1,7 @@
 data
 particle_pipeline_runs/
 analysis
+*.pdf
 *__pycache__/
 docs/
 paper/
