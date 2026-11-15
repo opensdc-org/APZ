@@ -1,4 +1,4 @@
-# APZ: Error-Bounded Compression for Cosmological Particle Data
+o# APZ: Error-Bounded Compression for Cosmological Particle Data
 
 APZ reduces the storage and data transfer costs of cosmological simulation snapshots. It compresses particle positions and velocities within user-defined error bounds and preserves particle IDs exactly when present. APZ is designed for [HyperMillennium (Qianyan)](https://doi.org/10.1093/mnras/stag540) and HACC data. Molecular dynamics trajectories are a planned extension.
 
@@ -9,7 +9,7 @@ APZ combines existing codecs with data layouts and particle ordering tailored to
 | Codec | Role in APZ | Reference |
 | --- | --- | --- |
 | [XnYZip](https://github.com/moonlightplague/XnYZip) | Compresses position triplets in the HACC workflow and can also compress velocity triplets. | Liu et al., [Error-bounded Point Cloud Compression Using Truncated Octahedron Quantization](https://doi.org/10.14778/3836663.3836676) |
-| [Falcons](https://github.com/opensdc-org/Falcons) | APZ uses an earlier implementation of Falcons for HACC velocity fields and for positions and velocities in the lattice-based workflow. | Lu et al., [Falcons: Pushing the Speed-Ratio Limits of Lossy Compression for Parallel Scientific Applications](https://arxiv.org/abs/2610.41209), PPoPP ’27 |
+| [Falcons](https://github.com/opensdc-org/Falcons) | APZ uses an earlier implementation of Falcons for HACC velocity fields and for positions and velocities in the lattice-based workflow. | Lu et al., [Falcons: Pushing the Speed-Ratio Limits of Lossy Compression for Parallel Scientific Applications](https://arxiv.org/abs/2610.41209)|
 | [LCP](https://github.com/moonlightplague/LCP) | Provides an alternative codec for position and velocity triplets. | Zhang et al., [LCP: Enhancing Scientific Data Management with Lossy Compression for Particles](https://doi.org/10.1145/3709700) |
 | [SZ3](https://github.com/szcompressor/SZ3) | Provides an alternative error-bounded codec for individual floating-point fields via `pysz`. | Liang et al., [SZ3: A Modular Framework for Composing Prediction-Based Error-Bounded Lossy Compressors](https://ieeexplore.ieee.org/document/9866018) |
 | [Pcodec](https://github.com/pcodec/pcodec) | Compresses IDs, ordering metadata, and optionally numeric fields losslessly. | Loncaric et al., [Pcodec: Better Compression for Numerical Sequences](https://arxiv.org/abs/2502.06112) |
