@@ -1,45 +1,35 @@
 advanced:
-  # Maximum concurrent file pipelines throughout a directory run.
-  # 0 selects automatically; 1 processes all files in series.
   file_workers: 0
 
-  # Relative paths are resolved from this config file's directory.
   lcp: ./tools/LCP/build/bin/lcp
   xnyzip: ./tools/XnYZip/build/XnYZip
 
-  # Optional field-specific bounds override --abs-eb/--rel-eb when set.
   abs_eb: null
   rel_eb: 1e-3
   pos_abs_eb: null
   pos_rel_eb: null
   vel_abs_eb: null
   vel_rel_eb: null
-  # 0 disables velocity chunking. Positive values support LCP velocities with
-  # LCP positions, or XnYZip velocities with LCP/XnYZip positions.
   vel_chunk_size: 0
-  # 0 selects up to 16 workers automatically for chunked velocities.
   vel_chunk_workers: 0
   id_abs_eb: 0.0
-  pos_compressor: xnyzip
+
+  pos_compressor: xnyzip #szo for HM
   vel_compressor: szo
   lossless: pcodec
-  # All pcodec fields and sidecars: 0 (fastest) through 12 (highest compression).
   pcodec_level: 12
-  # Opt-in periodic ID-lattice layout. Existing codec pipelines remain the
-  # default unless this is enabled here or with --lattice-layout.
-  lattice_layout: false
+
+  lattice_layout: false #true for szo positions in HM
   lattice_min_occupancy: 0.8
   lattice_axis_search: true
-  # Opt-in mesh-ID + hybrid velocity layout: XnYZip positions, SZO/XnYZip velocities.
-  # Existing methods and their defaults are unchanged.
+
   xnyzip_structure_aware: false
   xnyzip_velocity_cell_bits: 7
-  # Encoder-only velocity sorting within identical decoded positions; no sidecar.
-  xnyzip_tie_sort: false
-  # Enforce per-axis XnYZip position/velocity bounds with packaged corrections.
-  xnyzip_linf_bound: false
 
-  # Integer position conversion used before float32 triplet compression.
+  xnyzip_tie_sort: true #false if xnyzip not used (in HM)
+
+  xnyzip_linf_bound: false #true if want to use XnYZip's Linf bound, otherwise default L2 bound for position would be kept.
+
   position_scale: auto
   position_scale_attr: bitwidth
   position_scale_value: null
