@@ -9,14 +9,16 @@ APZ combines existing codecs with data layouts and particle ordering tailored to
 | Codec | Role in APZ | Reference |
 | --- | --- | --- |
 | [XnYZip](https://github.com/moonlightplague/XnYZip) | Compresses position triplets in the HACC workflow and can also compress velocity triplets. | Liu et al., [Error-bounded Point Cloud Compression Using Truncated Octahedron Quantization](https://doi.org/10.14778/3836663.3836676) |
-| [SZo](https://github.com/BingluCS/SZo) | Compresses velocity fields in the HACC workflow and position and velocity fields in the lattice-based workflow. | [SZo contributors, software repository](https://github.com/BingluCS/SZo) |
+| [Falcons](https://github.com/opensdc-org/Falcons) | APZ uses an earlier implementation of Falcons for HACC velocity fields and for positions and velocities in the lattice-based workflow. | Lu et al., [Falcons: Pushing the Speed-Ratio Limits of Lossy Compression for Parallel Scientific Applications](https://arxiv.org/abs/2610.41209), PPoPP ’27 |
 | [LCP](https://github.com/moonlightplague/LCP) | Provides an alternative codec for position and velocity triplets. | Zhang et al., [LCP: Enhancing Scientific Data Management with Lossy Compression for Particles](https://doi.org/10.1145/3709700) |
 | [SZ3](https://github.com/szcompressor/SZ3) | Provides an alternative error-bounded codec for individual floating-point fields via `pysz`. | Liang et al., [SZ3: A Modular Framework for Composing Prediction-Based Error-Bounded Lossy Compressors](https://ieeexplore.ieee.org/document/9866018) |
 | [Pcodec](https://github.com/pcodec/pcodec) | Compresses IDs, ordering metadata, and optionally numeric fields losslessly. | Loncaric et al., [Pcodec: Better Compression for Numerical Sequences](https://arxiv.org/abs/2502.06112) |
 
+APZ pins this earlier Falcons implementation as `tools/SZo` and selects it with `szo` on the command line.
+
 ## Compression results
 
-At a range-relative error setting of `1e-3` under a common per-coordinate error criterion, the APZ study reported the following overall compression ratios, including IDs where present and reconstruction metadata.
+The APZ study used the earlier SZo implementation of Falcons. At a range-relative error setting of `1e-3` under a common per-coordinate error criterion, it reported the following overall compression ratios, including IDs where present and reconstruction metadata.
 
 | Dataset | Particles | APZ | Best evaluated baseline |
 | --- | ---: | ---: | ---: |
@@ -58,7 +60,7 @@ python main.py roundtrip data/EXASKY-HACC-data-medium-size \
 
 The example explicitly enables velocity tie sorting and per-coordinate error bounds for XnYZip positions. Remove `--limit 1000000` and use a fresh work directory to process the full snapshot. The work directory contains `compressed/`, `manifest.json`, `reconstructed.h5`, and `metrics.json`.
 
-Use `python main.py roundtrip --help` for available options and the [testing guide](测试指南.md) for more codec combinations.
+Use `python main.py roundtrip --help` for available options. See [run.sh](run.sh) and [config.yaml](config.yaml) for HACC and HyperMillennium settings.
 
 <a name="higher-compression-for-snapshot_7"></a>
 For advanced layouts and larger runs, see the [snapshot examples](https://github.com/opensdc-org/APZ/blob/fba36141ac35455ae45c2c488a471a0e111781f9/README.md#higher-compression-for-snapshot_7).
